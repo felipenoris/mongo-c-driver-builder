@@ -21,4 +21,4 @@ platforms = supported_platforms()
 
 dependencies = []
 
-build_tarballs(ARGS, "mongo-c-driver-builder", version, sources, script, platforms, products, dependencies)
+build_tarballs(ARGS, "libbson", version, sources, script, platforms, products, dependencies)
