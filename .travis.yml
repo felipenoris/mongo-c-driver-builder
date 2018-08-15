@@ -1,0 +1,37 @@
+language: julia
+os:
+- linux
+julia:
+- 0.7
+notifications:
+  email: false
+git:
+  depth: 99999999
+cache:
+  timeout: 1000
+  directories:
+  - downloads
+env:
+  global:
+  - BINARYBUILDER_DOWNLOADS_CACHE=downloads
+  - BINARYBUILDER_AUTOMATIC_APPLE=true
+sudo: required
+before_install:
+- sudo apt-get install -y git-core automake autoconf libtool gcc
+before_script:
+- julia -e 'using Pkg; Pkg.clone("https://github.com/JuliaPackaging/BinaryBuilder.jl"); Pkg.build()'
+script:
+- julia build_tarballs.jl
+
+# generated with `travis setup releases` command (https://docs.travis-ci.com/user/deployment/releases/)
+deploy:
+  provider: releases
+  api_key:
+    secure: HFEdCUH8otgLppK3Mk4kc1Llb4TvgPIYZOWKzbs/y0IlcVduDHS1vY0nAMA1Of/7Khx4DPUGTJa9/6S4geGQQ4eUg6yUmyGZfkBxDYUAZpFaUWvD3XrdjCCqiPidpwYnPv/vYioeQ6N5HbxzGE0pKKZCoy5v1irC+dwA7hL2y06FHExQFE1Wwa0iBjgGmDfgu2DJftUYxqFcJV/LDd/vzRglrS7NgiaDatvhNw1ow54WVMphIKVTdxPtx30zzZe8+U/XYEmv0ztofqoha/S7p/DswGhyFSOS4jWD8t5oQB787WpaEQ7xN5AJLCNthfvKzo8zfEk0vv5fE+fmpnY2AmEJLZnXbREyiF9rg1e/YqfdAvuxYSyBGAv3Yq+YROZG2skCFzTYmkYS0SDw1KoiNAbVNxsPzqj9cpCIKjm6w7fZlkxPoRsuCEs2brQboq714egPgzozGyFVIh4bErWGmnS33GoNP/IuLq/xljsJXA/bCWIWaQQksaX10FoowA+IC4gxCrioWdksxjItPzoKx/5zY4H7YJ4eLaub8X7+4cDuHVx6rBVr6fStbFtNHkwzz90KXQcaF9R2GCk9Cnz4nxPJMQm9/Yh84yCIML7D6U1//HI5Zt0b1tie/XcuT/oBboDBPqLDit++J5c3xF43jr0YAj7TnVrSqo+FziLnhDo=
+  file_glob: true
+  file: products/*
+  skip_cleanup: true
+  on:
+    repo: felipenoris/mongo-c-driver-builder
+    tags: true
+#    branch: tests
