@@ -1,12 +1,15 @@
 
 using BinaryBuilder
 
-version = v"1.0.0"
+const version = v"1.9.5"
+
+const platforms_whitelist = [ Windows(:i686), Windows(:x86_64) ]
+const platforms = filter( x -> x ∉ platforms_whitelist, supported_platforms())
 
 let
 	sources = [
 	    "http://github.com/mongodb/libbson/releases/download/$(version)/libbson-$(version).tar.gz" =>
-	        "6c11100d699e0aacb3acb1ae13b4992a2890da3b0ea77b4f93b59649e336c386",
+	        "6bb51b863a4641d6d7729e4b55df8f4389ed534c34eb3a1cda906a53df11072c",
 	]
 
 	script = raw"""
@@ -19,8 +22,6 @@ let
 	    LibraryProduct(prefix, "libbson", :libbson)
 	]
 
-	platforms = supported_platforms()
-
 	dependencies = []
 
 	build_tarballs(ARGS, "libbson", version, sources, script, platforms, products, dependencies)
@@ -29,7 +30,7 @@ end
 let
 	sources = [
 	    "http://github.com/mongodb/mongo-c-driver/releases/download/$(version)/mongo-c-driver-$(version).tar.gz" =>
-	        "c8f441611e0f6317f6c4e5b610675c417b192bdecf6208615a585ca088f5dadb",
+	        "4a4bd0b0375450250a3da50c050b84b9ba8950ce32e16555714e75ebae0b8019",
 	]
 
 	script = raw"""
@@ -41,8 +42,6 @@ let
 	products(prefix) = [
 	    LibraryProduct(prefix, "libmongoc", :libmongoc)
 	]
-
-	platforms = supported_platforms()
 
 	dependencies = []
 
