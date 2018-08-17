@@ -1,5 +1,6 @@
 
 using BinaryBuilder
+import SHA
 
 const version = v"1.12.0"
 const URL_PREFIX = "https://github.com/felipenoris/mongo-c-driver-builder/releases/download/v$version"
@@ -16,7 +17,11 @@ const artefact = "libmongoc"
 		url = "$URL_PREFIX/$filename"
 		@async begin
 			run(`wget $url`)
-			sha = split(readstring(`shasum -a 256 $filename`), " ")[1]
+
+			open($filename, "r") do f
+				sha = bytes2hex(SHA.sha2_256(f))
+			end
+
 			download_info[platform] = (url, sha)
 			rm(filename)
 		end
