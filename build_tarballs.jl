@@ -14,7 +14,7 @@ cd mongo-c-driver-1.12.0/
 mkdir cmake-build
 cd cmake-build/
 cmake -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain ..
-make -j${nproc} install
+make -j${nproc}
 make install
 """
 
