@@ -45,4 +45,4 @@ products(prefix) = [
 dependencies = []
 
 # Build the tarballs, and possibly a `build.jl` as well.
-build_tarballs(ARGS, "libmongoc", sources, script, platforms, products, dependencies)
+build_tarballs(ARGS, "libmongoc", v"1.12.0", sources, script, platforms, products, dependencies)
