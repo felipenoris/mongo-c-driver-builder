@@ -1,8 +1,8 @@
 language: julia
 os:
-- linux
+  - linux
 julia:
-- 0.6
+  - 0.6
 notifications:
   email: false
 git:
@@ -17,11 +17,11 @@ env:
   - BINARYBUILDER_AUTOMATIC_APPLE=true
 sudo: required
 before_install:
-- sudo apt-get install -y git-core automake autoconf libtool gcc
+  - sudo apt-get install -y cmake libssl-dev libsasl2-dev
 before_script:
-- julia -e 'Pkg.clone("https://github.com/JuliaPackaging/BinaryBuilder.jl"); Pkg.build()'
+  - julia -e 'Pkg.clone("https://github.com/JuliaPackaging/BinaryBuilder.jl"); Pkg.build()'
 script:
-- julia build_tarballs.jl
+  - julia build_tarballs.jl
 
 # generated with `travis setup releases` command (https://docs.travis-ci.com/user/deployment/releases/)
 deploy:
@@ -34,4 +34,3 @@ deploy:
   on:
     repo: felipenoris/mongo-c-driver-builder
     tags: true
-#    branch: tests
