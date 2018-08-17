@@ -20,7 +20,6 @@ const artefact = "libmongoc"
 			download_info[platform] = (url, sha)
 			rm(filename)
 		end
-	end
 end
 
 println("==================")
