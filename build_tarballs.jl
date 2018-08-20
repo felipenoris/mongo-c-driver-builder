@@ -1,39 +1,51 @@
 
 using BinaryBuilder
 
-# Collection of sources required to build libmongoc
-sources = [
-    "https://github.com/mongodb/mongo-c-driver/releases/download/1.12.0/mongo-c-driver-1.12.0.tar.gz" =>
-    "e5924207f6ccbdf74a9b95305b150e96b3296a71f2aafbb21e647dc28d580c68",
-]
+const version = v"1.9.5"
 
-# Bash recipe for building across all platforms
-script = raw"""
-cd $WORKSPACE/srcdir
-cd mongo-c-driver-1.12.0/
-mkdir cmake-build
-cd cmake-build/
-cmake -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain ..
-make -j${nproc}
-make install
-"""
-
-# These are the platforms we will build for by default, unless further
-# platforms are passed in on the command line
 platforms = [
     Linux(:x86_64, :glibc),
     MacOS(:x86_64)
 ]
 
-# The products that we will ensure are always built
-products(prefix) = [
-    LibraryProduct(prefix, "libbson", :libbson),
-    LibraryProduct(prefix, "libmongoc", :libmongoc),
-    ExecutableProduct(prefix, "", :mongoc_stat)
-]
+let
+    sources = [
+        "http://github.com/mongodb/libbson/releases/download/$(version)/libbson-$(version).tar.gz" =>
+            "6bb51b863a4641d6d7729e4b55df8f4389ed534c34eb3a1cda906a53df11072c",
+    ]
 
-# Dependencies that must be installed before this package can be built
-dependencies = []
+    script = raw"""
+    cd ${WORKSPACE}/srcdir/libbson-*
+    ./configure --prefix=${prefix} --host=${target}
+    make -j${nproc} install
+    """
 
-# Build the tarballs, and possibly a `build.jl` as well.
-build_tarballs(ARGS, "libmongoc", v"1.12.0", sources, script, platforms, products, dependencies)
+    products(prefix) = [
+        LibraryProduct(prefix, "libbson", :libbson)
+    ]
+
+    dependencies = []
+
+    build_tarballs(ARGS, "libbson", version, sources, script, platforms, products, dependencies)
+end
+
+let
+    sources = [
+        "http://github.com/mongodb/mongo-c-driver/releases/download/$(version)/mongo-c-driver-$(version).tar.gz" =>
+            "4a4bd0b0375450250a3da50c050b84b9ba8950ce32e16555714e75ebae0b8019",
+    ]
+
+    script = raw"""
+    cd ${WORKSPACE}/srcdir/mongo-c-driver-*
+    ./configure --prefix=${prefix} --host=${target}
+    make -j${nproc} install
+    """
+
+    products(prefix) = [
+        LibraryProduct(prefix, "libmongoc", :libmongoc)
+    ]
+
+    dependencies = []
+
+    build_tarballs(ARGS, "libmongoc", version, sources, script, platforms, products, dependencies)
+end
