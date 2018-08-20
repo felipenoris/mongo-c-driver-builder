@@ -19,7 +19,7 @@ sudo: required
 before_install:
   - sudo apt-get install -y cmake libssl-dev libsasl2-dev
 before_script:
-  - julia -e 'Pkg.clone("https://github.com/JuliaPackaging/BinaryBuilder.jl"); Pkg.build()'
+  - julia -e 'Pkg.clone("https://github.com/felipenoris/BinaryBuilder.jl"); Pkg.checkout("BinaryBuilder", "fn/debug"); Pkg.build()'
 script:
   - julia build_tarballs.jl
 

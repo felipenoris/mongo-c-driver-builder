@@ -21,16 +21,7 @@ make install
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
 platforms = [
-    Linux(:i686, :glibc),
     Linux(:x86_64, :glibc),
-    Linux(:aarch64, :glibc),
-    Linux(:armv7l, :glibc, :eabihf),
-    Linux(:powerpc64le, :glibc),
-    Linux(:i686, :musl),
-    Linux(:x86_64, :musl),
-    Linux(:aarch64, :musl),
-    Linux(:armv7l, :musl, :eabihf),
-    FreeBSD(:x86_64),
     MacOS(:x86_64)
 ]
 
