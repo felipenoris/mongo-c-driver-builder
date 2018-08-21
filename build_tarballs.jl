@@ -9,8 +9,7 @@ platforms = [
     Linux(:armv7l, :glibc, :eabihf),
     Linux(:powerpc64le, :glibc),
     FreeBSD(:x86_64),
-    MacOS(:x86_64),
-    Windows(:x86_64)
+    MacOS(:x86_64)
 ]
 
 let
