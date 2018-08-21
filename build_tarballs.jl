@@ -5,7 +5,12 @@ const version = v"1.9.5"
 
 platforms = [
     Linux(:x86_64, :glibc),
-    MacOS(:x86_64)
+    Linux(:aarch64, :glibc),
+    Linux(:armv7l, :glibc, :eabihf),
+    Linux(:powerpc64le, :glibc),
+    FreeBSD(:x86_64),
+    MacOS(:x86_64),
+    Windows(:x86_64)
 ]
 
 let
