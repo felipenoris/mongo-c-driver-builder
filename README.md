@@ -1,6 +1,6 @@
 # mongo-c-driver-builder
 
-MongoDB driver builder for [LibBSON.jl](https://github.com/ScottPJones/LibBSON.jl) and [Mongo.jl](https://github.com/ScottPJones/Mongo.jl)
+MongoDB driver builder for [Mongoc.jl](https://github.com/felipenoris/Mongoc.jl).
 
 ## License of Binary Assets
 
