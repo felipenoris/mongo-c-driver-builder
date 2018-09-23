@@ -3,17 +3,18 @@ using BinaryBuilder
 
 # Collection of sources required to build libmongoc
 sources = [
-    "https://github.com/mongodb/mongo-c-driver/releases/download/1.12.0/mongo-c-driver-1.12.0.tar.gz" =>
-    "e5924207f6ccbdf74a9b95305b150e96b3296a71f2aafbb21e647dc28d580c68",
+    "https://github.com/mongodb/mongo-c-driver/releases/download/1.13.0/mongo-c-driver-1.13.0.tar.gz" =>
+    "25164e03b08baf9f2dd88317f1a36ba36b09f563291a7cf241f0af8676155b8d",
 ]
 
 # Bash recipe for building across all platforms
 script = raw"""
 cd $WORKSPACE/srcdir
-cd mongo-c-driver-1.12.0/
+cd mongo-c-driver-1.13.0/
 mkdir cmake-build
 cd cmake-build/
-cmake -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain ..
+cmake -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF -DCMAKE_BUILD_TYPE=Release -DENABLE_SSL=AUTO -DENABLE_STATIC=ON -DENABLE_MONGOC=ON -DENABLE_BSON=ON -DENABLE_ZLIB=BUNDLED -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain ..
+cat CMakeCache.txt
 make -j${nproc}
 make install
 """
@@ -36,4 +37,4 @@ products(prefix) = [
 dependencies = []
 
 # Build the tarballs, and possibly a `build.jl` as well.
-build_tarballs(ARGS, "libmongoc", v"1.12.0", sources, script, platforms, products, dependencies)
+build_tarballs(ARGS, "libmongoc", v"1.13.0", sources, script, platforms, products, dependencies)
