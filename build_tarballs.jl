@@ -9,6 +9,7 @@ sources = [
 
 # Bash recipe for building across all platforms
 script = raw"""
+apk add openssl-dev
 cd $WORKSPACE/srcdir
 cd mongo-c-driver-1.13.0/
 mkdir cmake-build
@@ -29,8 +30,7 @@ platforms = [
 # The products that we will ensure are always built
 products(prefix) = [
     LibraryProduct(prefix, "libbson", :libbson),
-    LibraryProduct(prefix, "libmongoc", :libmongoc),
-    ExecutableProduct(prefix, "", :mongoc_stat)
+    LibraryProduct(prefix, "libmongoc", :libmongoc)
 ]
 
 # Dependencies that must be installed before this package can be built
