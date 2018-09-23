@@ -9,6 +9,7 @@ sources = [
 
 # Bash recipe for building across all platforms
 script = raw"""
+apk update
 apk add openssl-dev
 cd $WORKSPACE/srcdir
 cd mongo-c-driver-1.13.0/
