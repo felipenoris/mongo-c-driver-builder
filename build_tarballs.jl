@@ -25,7 +25,6 @@ cd openssl-1.1.1/
 ./config
 make -j${nproc}
 make install
-ldconfig
 cd ..
 cd mongo-c-driver-1.13.0/
 mkdir cmake-build
