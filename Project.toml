@@ -1,0 +1,8 @@
+name = "mongo-c-driver-builder"
+uuid = "2ab0d262-53fc-11e9-3fbc-abdbdc27d7a3"
+authors = ["Felipe Noronha <felipenoris@gmail.com>"]
+version = "1.14.0"
+
+[deps]
+BinaryBuilder = "12aac903-9f7c-5d81-afc2-d9565ea332ae"
+BinaryProvider = "b99e7846-7c00-51b0-8f62-c81ae34c0232"

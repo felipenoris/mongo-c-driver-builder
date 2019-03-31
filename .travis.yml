@@ -2,7 +2,7 @@ language: julia
 os:
   - linux
 julia:
-  - 0.6
+  - 1.1
 notifications:
   email: false
 git:
@@ -10,18 +10,17 @@ git:
 cache:
   timeout: 1000
   directories:
-  - downloads
+    - downloads
 env:
   global:
-  - BINARYBUILDER_DOWNLOADS_CACHE=downloads
-  - BINARYBUILDER_AUTOMATIC_APPLE=true
+    - BINARYBUILDER_DOWNLOADS_CACHE=downloads
+    - BINARYBUILDER_AUTOMATIC_APPLE=true
 sudo: required
-before_install:
-  - sudo apt-get install -y cmake libssl-dev libsasl2-dev
 before_script:
-  - julia -e 'Pkg.clone("https://github.com/felipenoris/BinaryBuilder.jl"); Pkg.checkout("BinaryBuilder", "fn/debug"); Pkg.build()'
+  - julia -e 'using Pkg; pkg"add BinaryProvider"; pkg"add BinaryBuilder#master"; Pkg.build()'
 script:
-  - julia build_tarballs.jl
+  - julia build_tarballs_apple.jl
+  - julia build_tarballs_linux.jl
 
 # generated with `travis setup releases` command (https://docs.travis-ci.com/user/deployment/releases/)
 deploy:
