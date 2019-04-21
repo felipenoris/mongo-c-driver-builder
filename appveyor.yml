@@ -1,0 +1,32 @@
+image:
+  - Visual Studio 2015
+
+platform:
+  - x64
+
+install:
+  - ps: Start-FileDownload 'https://github.com/mongodb/mongo-c-driver/releases/download/1.14.0/mongo-c-driver-1.14.0.tar.gz'
+
+build_script:
+  - tar xf mongo-c-driver-1.14.0.tar.gz
+  - cmake --version
+  - cd mongo-c-driver-1.14.0
+  - mkdir cmake-build
+  - cd cmake-build
+  - cmake -G "Visual Studio 14 2015 Win64" "-DCMAKE_INSTALL_PREFIX=C:\usr" "-DCMAKE_PREFIX_PATH=C:\usr" ..
+  - msbuild.exe /p:Configuration=RelWithDebInfo ALL_BUILD.vcxproj
+  - msbuild.exe INSTALL.vcxproj
+  - cd C:\
+  - tar -zcvf mongo-c-driver-builder.v1.14.0.x86_64-w64.tar.gz usr
+
+deploy:
+  description: 'libmongoc driver for windows x86_64'
+  provider: GitHub
+  auth_token:
+    secure: HFEdCUH8otgLppK3Mk4kc1Llb4TvgPIYZOWKzbs/y0IlcVduDHS1vY0nAMA1Of/7Khx4DPUGTJa9/6S4geGQQ4eUg6yUmyGZfkBxDYUAZpFaUWvD3XrdjCCqiPidpwYnPv/vYioeQ6N5HbxzGE0pKKZCoy5v1irC+dwA7hL2y06FHExQFE1Wwa0iBjgGmDfgu2DJftUYxqFcJV/LDd/vzRglrS7NgiaDatvhNw1ow54WVMphIKVTdxPtx30zzZe8+U/XYEmv0ztofqoha/S7p/DswGhyFSOS4jWD8t5oQB787WpaEQ7xN5AJLCNthfvKzo8zfEk0vv5fE+fmpnY2AmEJLZnXbREyiF9rg1e/YqfdAvuxYSyBGAv3Yq+YROZG2skCFzTYmkYS0SDw1KoiNAbVNxsPzqj9cpCIKjm6w7fZlkxPoRsuCEs2brQboq714egPgzozGyFVIh4bErWGmnS33GoNP/IuLq/xljsJXA/bCWIWaQQksaX10FoowA+IC4gxCrioWdksxjItPzoKx/5zY4H7YJ4eLaub8X7+4cDuHVx6rBVr6fStbFtNHkwzz90KXQcaF9R2GCk9Cnz4nxPJMQm9/Yh84yCIML7D6U1//HI5Zt0b1tie/XcuT/oBboDBPqLDit++J5c3xF43jr0YAj7TnVrSqo+FziLnhDo=
+  artifact: \*.tar.gz
+  draft: false
+  prerelease: false
+  on:
+    branch: master
+    APPVEYOR_REPO_TAG: true
