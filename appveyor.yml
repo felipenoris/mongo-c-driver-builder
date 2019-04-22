@@ -13,7 +13,8 @@ install:
 build_script:
   - tar xf mongo-c-driver-1.14.0.tar.gz
   - cd mongo-c-driver-1.14.0
-  - CC=/mingw64/bin/gcc.exe /mingw64/bin/cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX="%APPVEYOR_BUILD_FOLDER%/target" .
+#  - CC=/mingw64/bin/gcc.exe /mingw64/bin/cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX="%APPVEYOR_BUILD_FOLDER%/target" .
+  - cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX="%APPVEYOR_BUILD_FOLDER%/target" .
   - make
   - cd %APPVEYOR_BUILD_FOLDER%/target
   - tar -zcvf ../mongo-c-driver-builder.v1.14.0.mingw-w64-x86_64.tar.gz *
