@@ -1,25 +1,25 @@
-image:
-  - Visual Studio 2015
 
 platform:
   - x64
 
 install:
+  - set PATH=C:\msys64\usr\bin;%PATH%
+  - bash -lc "pacman --noconfirm -Syu"
+  - bash -lc "pacman --noconfirm -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake"
+  - bash -lc "pacman --noconfirm -S mingw-w64-x86_64-extra-cmake-modules make tar"
+  - bash -lc "pacman --noconfirm -S mingw64/mingw-w64-x86_64-cyrus-sasl"
   - ps: Start-FileDownload 'https://github.com/mongodb/mongo-c-driver/releases/download/1.14.0/mongo-c-driver-1.14.0.tar.gz'
 
 build_script:
   - tar xf mongo-c-driver-1.14.0.tar.gz
   - cd mongo-c-driver-1.14.0
-  - mkdir cmake-build
-  - cd cmake-build
-  - cmake -G "Visual Studio 14 2015 Win64" "-DCMAKE_INSTALL_PREFIX=%APPVEYOR_BUILD_FOLDER%/target" "-DCMAKE_PREFIX_PATH=%APPVEYOR_BUILD_FOLDER%/target" ..
-  - msbuild.exe /p:Configuration=RelWithDebInfo ALL_BUILD.vcxproj
-  - msbuild.exe INSTALL.vcxproj
+  - CC=/mingw64/bin/gcc.exe /mingw64/bin/cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX="%APPVEYOR_BUILD_FOLDER%/target" .
+  - make
   - cd %APPVEYOR_BUILD_FOLDER%/target
-  - tar -zcvf ../mongo-c-driver-builder.v1.14.0.x86_64-windows.tar.gz *
+  - tar -zcvf ../mongo-c-driver-builder.v1.14.0.mingw-w64-x86_64.tar.gz *
 
 artifacts:
-  - path: .\mongo-c-driver-builder.v1.14.0.x86_64-windows.tar.gz
+  - path: .\mongo-c-driver-builder.v1.14.0.mingw-w64-x86_64.tar.gz
     name: tarball
     type: File
 
