@@ -1,5 +1,4 @@
-image:
-  - Visual Studio 2015
+image: Visual Studio 2017
 
 platform:
   - x64
@@ -12,7 +11,7 @@ build_script:
   - cd mongo-c-driver-1.14.0
   - mkdir cmake-build
   - cd cmake-build
-  - cmake -G "Visual Studio 14 2015 Win64" "-DCMAKE_INSTALL_PREFIX=%APPVEYOR_BUILD_FOLDER%/target" "-DCMAKE_PREFIX_PATH=%APPVEYOR_BUILD_FOLDER%/target" ..
+  - cmake -G "Visual Studio 15 2017" "-DCMAKE_INSTALL_PREFIX=%APPVEYOR_BUILD_FOLDER%/target" "-DCMAKE_PREFIX_PATH=%APPVEYOR_BUILD_FOLDER%/target" ..
   - msbuild.exe /p:Configuration=RelWithDebInfo ALL_BUILD.vcxproj
   - msbuild.exe INSTALL.vcxproj
   - cd %APPVEYOR_BUILD_FOLDER%/target
