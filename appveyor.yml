@@ -19,12 +19,17 @@ build_script:
   - cd C:\
   - tar -zcvf mongo-c-driver-builder.v1.14.0.x86_64-w64.tar.gz usr
 
+artifacts:
+  - path: C:\mongo-c-driver-builder.v1.14.0.x86_64-w64.tar.gz
+    name: tarball
+    type: File
+
 deploy:
   description: 'libmongoc driver for windows x86_64'
   provider: GitHub
   auth_token:
     secure: oju7dP5xizhRhVzfp+o4vdl+eI2UplzGv5n8H4t+nCGvokaHQsNipRYlGRUZUyR6
-  artifact: \*.tar.gz
+  artifact: tarball
   draft: false
   prerelease: false
   on:
