@@ -4,10 +4,10 @@ platform:
 
 install:
   - set PATH=C:\msys64\usr\bin;%PATH%
-  - bash -lc "pacman --noconfirm -Syu"
-  - bash -lc "pacman --noconfirm -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake"
-  - bash -lc "pacman --noconfirm -S mingw-w64-x86_64-extra-cmake-modules make tar"
-  - bash -lc "pacman --noconfirm -S mingw64/mingw-w64-x86_64-cyrus-sasl"
+#  - bash -lc "pacman --noconfirm -Syu"
+#  - bash -lc "pacman --noconfirm -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake"
+#  - bash -lc "pacman --noconfirm -S mingw-w64-x86_64-extra-cmake-modules make tar"
+#  - bash -lc "pacman --noconfirm -S mingw64/mingw-w64-x86_64-cyrus-sasl"
   - ps: Start-FileDownload 'https://github.com/mongodb/mongo-c-driver/releases/download/1.14.0/mongo-c-driver-1.14.0.tar.gz'
 
 build_script:
