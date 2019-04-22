@@ -9,18 +9,17 @@ install:
 
 build_script:
   - tar xf mongo-c-driver-1.14.0.tar.gz
-  - cmake --version
   - cd mongo-c-driver-1.14.0
   - mkdir cmake-build
   - cd cmake-build
-  - cmake -G "Visual Studio 14 2015 Win64" "-DCMAKE_INSTALL_PREFIX=C:\usr" "-DCMAKE_PREFIX_PATH=C:\usr" ..
+  - cmake -G "Visual Studio 14 2015 Win64" "-DCMAKE_INSTALL_PREFIX=%APPVEYOR_BUILD_FOLDER%/usr" "-DCMAKE_PREFIX_PATH=%APPVEYOR_BUILD_FOLDER%/usr" ..
   - msbuild.exe /p:Configuration=RelWithDebInfo ALL_BUILD.vcxproj
   - msbuild.exe INSTALL.vcxproj
-  - cd C:\
-  - tar -zcvf mongo-c-driver-builder.v1.14.0.x86_64-w64.tar.gz usr
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - tar -zcvf mongo-c-driver-builder.v1.14.0.x86_64-windows.tar.gz usr
 
 artifacts:
-  - path: ..\..\mongo-c-driver-builder.v1.14.0.x86_64-w64.tar.gz
+  - path: .\mongo-c-driver-builder.v1.14.0.x86_64-windows.tar.gz
     name: tarball
     type: File
 
