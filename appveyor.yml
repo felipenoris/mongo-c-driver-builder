@@ -23,7 +23,7 @@ deploy:
   description: 'libmongoc driver for windows x86_64'
   provider: GitHub
   auth_token:
-    secure: HFEdCUH8otgLppK3Mk4kc1Llb4TvgPIYZOWKzbs/y0IlcVduDHS1vY0nAMA1Of/7Khx4DPUGTJa9/6S4geGQQ4eUg6yUmyGZfkBxDYUAZpFaUWvD3XrdjCCqiPidpwYnPv/vYioeQ6N5HbxzGE0pKKZCoy5v1irC+dwA7hL2y06FHExQFE1Wwa0iBjgGmDfgu2DJftUYxqFcJV/LDd/vzRglrS7NgiaDatvhNw1ow54WVMphIKVTdxPtx30zzZe8+U/XYEmv0ztofqoha/S7p/DswGhyFSOS4jWD8t5oQB787WpaEQ7xN5AJLCNthfvKzo8zfEk0vv5fE+fmpnY2AmEJLZnXbREyiF9rg1e/YqfdAvuxYSyBGAv3Yq+YROZG2skCFzTYmkYS0SDw1KoiNAbVNxsPzqj9cpCIKjm6w7fZlkxPoRsuCEs2brQboq714egPgzozGyFVIh4bErWGmnS33GoNP/IuLq/xljsJXA/bCWIWaQQksaX10FoowA+IC4gxCrioWdksxjItPzoKx/5zY4H7YJ4eLaub8X7+4cDuHVx6rBVr6fStbFtNHkwzz90KXQcaF9R2GCk9Cnz4nxPJMQm9/Yh84yCIML7D6U1//HI5Zt0b1tie/XcuT/oBboDBPqLDit++J5c3xF43jr0YAj7TnVrSqo+FziLnhDo=
+    secure: oju7dP5xizhRhVzfp+o4vdl+eI2UplzGv5n8H4t+nCGvokaHQsNipRYlGRUZUyR6
   artifact: \*.tar.gz
   draft: false
   prerelease: false
