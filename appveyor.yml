@@ -20,7 +20,7 @@ build_script:
   - tar -zcvf mongo-c-driver-builder.v1.14.0.x86_64-w64.tar.gz usr
 
 artifacts:
-  - path: C:\mongo-c-driver-builder.v1.14.0.x86_64-w64.tar.gz
+  - path: ..\..\mongo-c-driver-builder.v1.14.0.x86_64-w64.tar.gz
     name: tarball
     type: File
 
